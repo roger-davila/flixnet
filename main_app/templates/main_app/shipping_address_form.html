@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if object %}
+  <h1>Edit Address</h1>
+{% else %}
+  <h1>Add Address</h1>
+{% endif %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit!">
+</form>
+{% endblock %}
