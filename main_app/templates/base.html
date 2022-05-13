@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="">
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <h2>Flixnet</h2>
+    <a href="">Home</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Log Out</a>
+    {% else %}
+      <a href="{% url 'login' %}">Log In</a>
+      <a href="{% url 'signup' %}">Sign Up</a>
+    {% endif %}
+  </nav>
+  <main>
+    {% block content%}
+    {% endblock %}
+  </main>
+</body>
+</html>
