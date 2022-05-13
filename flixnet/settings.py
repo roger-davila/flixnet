@@ -78,6 +78,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'flixnet',
+        'USER': 'prkrsamuels',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
