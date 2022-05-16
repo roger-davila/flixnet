@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <form action="{% url 'search' %}" method="GET">
+    {% csrf_token %}
+    <input type="text" name="search">
+    <input type="submit" name="submit" value="SearchXYZ">
+  </form>
+  <p>{{movies.length}}</p>
+  {% if movies.length %}
+    {% for movie in movies %}
+      <p>{{movie.original_title}}</p>
+      <p>{{movie.id}}</p>
+      <p>{{movie.poster_path}}</p>
+    {% endfor %}
+  {% endif %}
+{% endblock %}
