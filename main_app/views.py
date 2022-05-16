@@ -6,6 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ShippingAddress
 from django.contrib.auth.models import User
+import requests
+import json
+import os
 
 # Create your views here.
 def home(request):
@@ -51,3 +54,17 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message }
   return render(request, 'registration/signup.html', context)
+
+def search(request):
+  query = request.GET.get('search')
+  print(query)
+  movies = ''
+  if query:
+    response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
+    movies = response.json()
+    print(movies)
+    print(f"{os.environ['MOVIE_DB_ROOT']}movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
+  return render(request, 'movies/search.html', {'movies': movies})
+
+# https://api.themoviedb.org/3/discover/movie?api_key=b0a09fc3d968c8a9e4eee1cf4f58d556&with_genres=28
+# Url above for genre search
