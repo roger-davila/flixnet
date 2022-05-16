@@ -80,7 +80,11 @@ WSGI_APPLICATION = 'flixnet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'flixnet'
+        'NAME': 'flixnet',
+        'USER': 'prkrsamuels',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 

@@ -59,12 +59,14 @@ def search(request):
   query = request.GET.get('search')
   print(query)
   movies = ''
+  image_url = ''
   if query:
     response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
-    movies = response.json()
-    print(movies)
+    movies = response.json()['results']
+    print(movies[1])
     print(f"{os.environ['MOVIE_DB_ROOT']}movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
-  return render(request, 'movies/search.html', {'movies': movies})
+    image_url = os.environ['MOVIE_DB_IMAGE_URL']
+  return render(request, 'movies/search.html', {'movies': movies, 'image_url': image_url})
 
 # https://api.themoviedb.org/3/discover/movie?api_key=b0a09fc3d968c8a9e4eee1cf4f58d556&with_genres=28
 # Url above for genre search
