@@ -32,6 +32,13 @@ STATES = (
   ('WI', 'WI'), ('WY', 'WY'),
 )
 
+class Movie(models.Model):
+  name = models.CharField(max_length=1024)
+  api_id = models.CharField(max_length=1024)
+
+  def __str__(self):
+    return f"Movie API Id: {self.api_id} has movie name : {self.name}"
+
 class ShippingAddress(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   name = models.CharField(max_length=1024)
@@ -46,3 +53,22 @@ class ShippingAddress(models.Model):
 
   def __str__(self):
     return f"Customer: {self.name} created by User: {self.user_id}"
+
+class Order(models.Model):
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  ship_address = models.ForeignKey(ShippingAddress, on_delete=models.CASCADE)
+  order_date = models.DateTimeField(auto_now_add=True)
+  checkout_status = models.BooleanField(default=False)
+
+  def __str__(self):
+    return f"Order: {self.id} created by User: {self.user_id}"
+
+class OrderDetail(models.Model):
+  order = models.ForeignKey(Order, on_delete=models.CASCADE)
+  movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+  quantity = models.IntegerField()
+  price = models.FloatField()
+
+  def __str__(self):
+    return f"Order Detail: {self.id}"
+  
