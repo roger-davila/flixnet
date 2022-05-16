@@ -5,12 +5,15 @@
     <input type="text" name="search">
     <input type="submit" name="submit" value="SearchXYZ">
   </form>
-  <p>{{movies.length}}</p>
-  {% if movies.length %}
+  {% if movies %}
     {% for movie in movies %}
-      <p>{{movie.original_title}}</p>
-      <p>{{movie.id}}</p>
-      <p>{{movie.poster_path}}</p>
+    <a href="{% url 'movie_detail' movie.id %}">
+      <article>
+        <p>{{movie.original_title}}</p>
+        <p>{{movie.id}}</p>
+        <img src="{{image_url}}{{movie.poster_path}}" alt="">
+      </article>
+    </a>
     {% endfor %}
   {% endif %}
 {% endblock %}
