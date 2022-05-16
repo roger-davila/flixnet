@@ -7,9 +7,13 @@
   </form>
   {% if movies %}
     {% for movie in movies %}
-      <p>{{movie.original_title}}</p>
-      <p>{{movie.id}}</p>
-      <img src="{{image_url}}{{movie.poster_path}}" alt="">
+    <a href="{% url 'movie_detail' movie.id %}">
+      <article>
+        <p>{{movie.original_title}}</p>
+        <p>{{movie.id}}</p>
+        <img src="{{image_url}}{{movie.poster_path}}" alt="">
+      </article>
+    </a>
     {% endfor %}
   {% endif %}
 {% endblock %}

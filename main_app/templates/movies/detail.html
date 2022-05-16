@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>movie details</h1>
+  <h1>{{ movie.original_title }}</h1>
+  <img src="{{image_url}}{{movie.backdrop_path}}" alt="">
+  <img src="{{image_url}}{{movie.poster_path}}" alt="">
+  {% for person in credits %}
+    <p>{{ person.name }}</p>
+  {% endfor %}
+{% endblock %}
