@@ -3,6 +3,7 @@
 <h1>User Home Page</h1>
   <div class="col s6">
     <h4>{{ user.username }}</h4>
+      <a href="{% url 'shipping_address_create' %}">Add Address</a>
       {% for address in addresses %}
           <div class="card-content">
             <span class="card-title">
@@ -13,6 +14,8 @@
                <p>ZipCode {{ address.zip_code }}</p>
                <p>Country {{ address.country }}</p>
             </span>
+            <a href="{% url 'shipping_address_update' address.id %}">Edit</a>
+            <a href="{% url 'shipping_address_delete' address.id %}">Delete</a>
           </div>
       {% endfor %}
       <h5></h5>
