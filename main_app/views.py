@@ -4,10 +4,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ShippingAddress
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
+
+def userprofile(request, user_id):
+  # filter to show just the logged in user's address
+  addresses = ShippingAddress.objects.filter(user=request.user)
+  user = User.objects.get(id=user_id)
+  # order = ShippingAddress.objects.filter(user=request.user)
+  return render(request, 'users/index.html', {'addresses' : addresses , 'user':user})
 
 class ShippingAddressCreate(LoginRequiredMixin, CreateView):
   model = ShippingAddress
