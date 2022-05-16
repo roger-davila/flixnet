@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
   <h1>Home</h1>
+  <h1>New Release</h1>
+  {% for genre in genres %}
+    <h1>{{ genre.name }}</h1>
+    {% for movie in genre.movies %}
+    <h4>{{ movie.original_title }}</h4>
+    <img src="{{image_url}}{{movie.poster_path}}" width="50" alt="{{ movie.original_title }}">
+    {% endfor %}
+  {% endfor %}
 {% endblock %}

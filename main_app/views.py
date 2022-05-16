@@ -12,7 +12,13 @@ import os
 
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+  response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}genre/movie/list?api_key={os.environ['MOVIE_DB_KEY']}")
+  genres = response.json()['genres']
+  image_url = os.environ['MOVIE_DB_IMAGE_URL']
+  for genre in genres:
+    genre['movies']= requests.get(f"{os.environ['MOVIE_DB_ROOT']}discover/movie?api_key={os.environ['MOVIE_DB_KEY']}&with_genres={genre['id']}").json()['results']
+  print(genres)
+  return render(request, 'home.html', {'genres': genres, 'image_url': image_url })
 
 def userprofile(request, user_id):
   # filter to show just the logged in user's address
