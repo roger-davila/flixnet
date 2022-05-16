@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,6 +25,16 @@ class ShippingAddressCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+
+class ShippingAddressUpdate(LoginRequiredMixin, UpdateView):
+  model = ShippingAddress
+  fields=['name', 'address', 'city', 'zip_code', 'state', 'country']
+
+class ShippingAddressDelete(LoginRequiredMixin, DeleteView):
+  model = ShippingAddress
+  
+  def get_success_url(self):
+      return reverse('userprofile', kwargs={'user_id': self.request.user.pk})
 
 def signup(request):
   error_message = ''
