@@ -96,7 +96,6 @@ def movie_detail(request, movie_id):
 
 
 def cart(request):
-  
   try:
     open_order = Order.objects.get(user=request.user.id, checkout_status=False)
     if open_order:
@@ -127,7 +126,12 @@ def add_to_cart(request):
   except:
     pass
   if current_order:
-     OrderDetail.objects.create(order = current_order, movie = selected_movie, quantity=1, price=2.99)
+    try:
+      order_to_update = OrderDetail.objects.filter(order=current_order, movie=selected_movie)
+      q = order_to_update[0].quantity + 1
+      order_to_update.update(quantity=q) 
+    except:
+      OrderDetail.objects.create(order = current_order, movie = selected_movie, quantity=1, price=2.99)
   else:
     addresses = ShippingAddress.objects.filter(user=request.user)
     default_address = addresses[0]
