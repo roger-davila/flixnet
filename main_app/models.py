@@ -35,6 +35,7 @@ STATES = (
 class Movie(models.Model):
   name = models.CharField(max_length=1024)
   api_id = models.CharField(max_length=1024)
+  price = models.DecimalField(max_digits=6, decimal_places=2)
 
   def __str__(self):
     return f"Movie API Id: {self.api_id} has movie name : {self.name}"
@@ -62,13 +63,16 @@ class Order(models.Model):
 
   def __str__(self):
     return f"Order: {self.id} created by User: {self.user_id}"
+  
+  def order_detail_list(self):
+    return self.orderdetail_set.all()
 
 class OrderDetail(models.Model):
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
   movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
   quantity = models.IntegerField()
-  price = models.FloatField()
+  price = models.DecimalField(max_digits=6, decimal_places=2)
 
   def __str__(self):
-    return f"Order Detail: {self.id}"
+    return f"Order Detail: {self.id} movie: {self.movie.name}"
   
