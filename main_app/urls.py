@@ -11,6 +11,7 @@ urlpatterns = [
   path('shipping_address/<int:pk>/update/', views.ShippingAddressUpdate.as_view(), name='shipping_address_update'),
   path('user/<int:user_id>/', views.userprofile, name='userprofile'),
   path('cart/', views.cart, name='cart'),
+  path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
   path('cart/checkout/', views.checkout, name='checkout'),
   path('cart/confirm_order/<int:order_id>/', views.confirm_order, name='confirm_order')
 ]
