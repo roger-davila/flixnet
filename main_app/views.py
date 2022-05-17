@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import ShippingAddress
+from .models import ShippingAddress, Order, OrderDetail, Movie
 from django.contrib.auth.models import User
 import requests
 import json
@@ -87,3 +87,12 @@ def movie_detail(request, movie_id):
   movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}").json()
   credits = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}/credits?api_key={os.environ['MOVIE_DB_KEY']}").json()['cast'][:10]
   return render(request, 'movies/detail.html', {'movie': movie, 'credits': credits, 'image_url': image_url })
+
+
+def cart(request):
+  try:
+    open_order = Order.objects.get(user=request.user.id, checkout_status=False)
+  except:
+    open_order = ''
+  print(open_order.order_detail_list())
+  return render(request, 'cart.html', { 'open_order': open_order })

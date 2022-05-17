@@ -62,6 +62,9 @@ class Order(models.Model):
 
   def __str__(self):
     return f"Order: {self.id} created by User: {self.user_id}"
+  
+  def order_detail_list(self):
+    return self.orderdetail_set.all()
 
 class OrderDetail(models.Model):
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -70,5 +73,5 @@ class OrderDetail(models.Model):
   price = models.FloatField()
 
   def __str__(self):
-    return f"Order Detail: {self.id}"
+    return f"Order Detail: {self.id} movie: {self.movie.name}"
   
