@@ -12,7 +12,12 @@ import os
 
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+  response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}genre/movie/list?api_key={os.environ['MOVIE_DB_KEY']}")
+  genres = response.json()['genres']
+  image_url = os.environ['MOVIE_DB_IMAGE_URL']
+  for genre in genres:
+    genre['movies']= requests.get(f"{os.environ['MOVIE_DB_ROOT']}discover/movie?api_key={os.environ['MOVIE_DB_KEY']}&with_genres={genre['id']}").json()['results']
+  return render(request, 'home.html', {'genres': genres, 'image_url': image_url })
 
 def userprofile(request, user_id):
   # filter to show just the logged in user's address
@@ -57,14 +62,15 @@ def signup(request):
 
 def search(request):
   query = request.GET.get('search')
-  print(query)
   movies = ''
+  image_url = ''
   if query:
-    response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
-    movies = response.json()
-    print(movies)
-    print(f"{os.environ['MOVIE_DB_ROOT']}movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}")
-  return render(request, 'movies/search.html', {'movies': movies})
+    movies = requests.get(f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}").json()['results']
+    image_url = os.environ['MOVIE_DB_IMAGE_URL']
+  return render(request, 'movies/search.html', {'movies': movies, 'image_url': image_url})
 
-# https://api.themoviedb.org/3/discover/movie?api_key=b0a09fc3d968c8a9e4eee1cf4f58d556&with_genres=28
-# Url above for genre search
+def movie_detail(request, movie_id):
+  image_url = os.environ['MOVIE_DB_IMAGE_URL']
+  movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}").json()
+  credits = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}/credits?api_key={os.environ['MOVIE_DB_KEY']}").json()['cast'][:10]
+  return render(request, 'movies/detail.html', {'movie': movie, 'credits': credits, 'image_url': image_url })
