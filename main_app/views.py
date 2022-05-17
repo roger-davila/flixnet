@@ -13,7 +13,7 @@ import multiprocessing
 
 
 # Super Buff Multiprocessing code by TBD
-async def home(request):
+def home(request):
   response = requests.get(f"{os.environ['MOVIE_DB_ROOT']}genre/movie/list?api_key={os.environ['MOVIE_DB_KEY']}")
   genres = response.json()['genres']
   image_url = os.environ['MOVIE_DB_IMAGE_URL']
@@ -24,7 +24,7 @@ async def home(request):
 
 
 def get_movies_from_genre(genre):
-   genre['movies']= requests.get(f"{os.environ['MOVIE_DB_ROOT']}discover/movie?api_key={os.environ['MOVIE_DB_KEY']}&with_genres={genre['id']}").json()['results']
+   genre['movies']= requests.get(f"{os.environ['MOVIE_DB_ROOT']}discover/movie?api_key={os.environ['MOVIE_DB_KEY']}&with_genres={genre['id']}&language=en-US").json()['results']
    return genre
 
 
