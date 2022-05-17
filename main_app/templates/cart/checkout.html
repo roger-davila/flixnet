@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Checkout</h1>
+<form action="{% url 'confirm_order' current_order.id %}">
+  <h4>Select Shipping Address</h4>
+  <select name="shipping_address">
+    {% for address in addresses %}
+    <option value="{{ address }}">{{ address }}</option>
+    {% endfor %}
+  </select>
+  
+  <h4>Select Billing Address</h4>
+  <select name="shipping_address">
+    {% for address in addresses %}
+    <option value="{{ address }}">{{ address }}</option>
+    {% endfor %}
+  </select>
+  
+  <br>
+  <input type="number" placeholder="1234 5678 0987 6543">
+  <input type="text" placeholder="CVV">
+  <br>
+  <input type="text" placeholder="MM/DD">
+  <br>
+  <input type="text" placeholder="First Name">
+  <br>
+  <input type="text" placeholder="Last Name">
+  <br>
+  <button type="submit">Confirm</button>
+</form>
+{% endblock %}

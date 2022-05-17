@@ -92,7 +92,20 @@ def movie_detail(request, movie_id):
 def cart(request):
   try:
     open_order = Order.objects.get(user=request.user.id, checkout_status=False)
+    open_order = open_order.order_detail_list()
   except:
     open_order = ''
-  print(open_order.order_detail_list())
-  return render(request, 'cart.html', { 'open_order': open_order })
+  return render(request, 'cart/index.html', { 'open_order': open_order })
+
+
+def checkout(request):
+  current_order = Order.objects.get(user=request.user.id, checkout_status=False)
+  addresses = ShippingAddress.objects.filter(user=request.user)
+  return render(request, 'cart/checkout.html', { 'addresses': addresses, 'current_order': current_order })
+
+
+def confirm_order(request, order_id):
+  current_order = Order.objects.get(id=order_id)
+  current_order.checkout_status = True
+  current_order.save()
+  return render(request, 'cart/confirm_order.html', { 'current_order': current_order })
