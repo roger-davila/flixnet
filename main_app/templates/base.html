@@ -15,6 +15,7 @@
     <a href="{% url 'search' %}">Search Movies</a>
     {% if user.is_authenticated %}
       <a href="{% url 'userprofile' user.id %}">Profile</a>
+      <a href="{% url 'cart'%}">Cart</a>
       <a href="{% url 'logout' %}">Log Out</a>
     {% else %}
       <a href="{% url 'login' %}">Log In</a>

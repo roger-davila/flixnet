@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Cart</h1>
+  {% if open_order %}
+    {% for detail in open_order %}
+    <div>
+      {{ detail.movie.name }} x {{ detail.quantity }} |
+      {{ detail.price }}
+    </div>
+    {% endfor %}
+    <a href="{% url 'checkout'%}">Checkout</a>
+  {% else %}
+    <h2>No Open Orders</h2>
+  {% endif %}
+  
+{% endblock %}
