@@ -10,6 +10,7 @@ import requests
 import json
 import os
 import multiprocessing
+multiprocessing.set_start_method("fork")
 
 
 # Super Buff Multiprocessing code by TBD
