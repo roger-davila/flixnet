@@ -10,6 +10,7 @@ import requests
 import json
 import os
 import multiprocessing
+multiprocessing.set_start_method("fork")
 
 
 # Super Buff Multiprocessing code by TBD
@@ -86,13 +87,19 @@ def movie_detail(request, movie_id):
   image_url = os.environ['MOVIE_DB_IMAGE_URL']
   movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}").json()
   credits = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}/credits?api_key={os.environ['MOVIE_DB_KEY']}").json()['cast'][:10]
+  try:
+    if Movie.objects.get(api_id=movie_id):
+      pass   
+  except:
+    Movie.objects.create(api_id=movie['id'], name=movie['original_title'], price=2.99)
   return render(request, 'movies/detail.html', {'movie': movie, 'credits': credits, 'image_url': image_url })
 
 
 def cart(request):
   try:
     open_order = Order.objects.get(user=request.user.id, checkout_status=False)
-    open_order = open_order.order_detail_list()
+    if open_order:
+      open_order = open_order.order_detail_list()
   except:
     open_order = ''
   return render(request, 'cart/index.html', { 'open_order': open_order })
@@ -109,3 +116,25 @@ def confirm_order(request, order_id):
   current_order.checkout_status = True
   current_order.save()
   return render(request, 'cart/confirm_order.html', { 'current_order': current_order })
+
+def add_to_cart(request):
+  movie_id = request.POST.get('movie_id')
+  selected_movie = Movie.objects.get(api_id=movie_id)
+  current_order = ''
+  try:
+    current_order = Order.objects.get(user=request.user, checkout_status=False)
+  except:
+    pass
+  if current_order:
+    try:
+      order_to_update = OrderDetail.objects.filter(order=current_order, movie=selected_movie)
+      q = order_to_update[0].quantity + 1
+      order_to_update.update(quantity=q) 
+    except:
+      OrderDetail.objects.create(order = current_order, movie = selected_movie, quantity=1, price=2.99)
+  else:
+    addresses = ShippingAddress.objects.filter(user=request.user)
+    default_address = addresses[0]
+    new_order = Order.objects.create(user = request.user, ship_address = default_address)
+    OrderDetail.objects.create(order = new_order, movie = selected_movie, quantity=1, price=2.99)
+  return redirect('cart')
