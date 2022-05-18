@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<h1>Your Order History</h1>
+  {% for order in orders %}
+    <p>Order No. {{order.id}}</p>
+    <p>Order Placed: {{order.order_date}} - PST</p>
+    {% for item in order.order_detail_list %}
+      <p>{{ item.quantity }} - {{ item.movie.name }} - {{ item.price }}</p>
+    {% endfor %}
+  {% endfor %}
 {% endblock %}
