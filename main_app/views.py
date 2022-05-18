@@ -89,15 +89,21 @@ def search(request):
 
 def movie_detail(request, movie_id):
   image_url = os.environ['MOVIE_DB_IMAGE_URL']
-  movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}").json()
+  movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}&append_to_response=release_dates").json()
   credits = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}/credits?api_key={os.environ['MOVIE_DB_KEY']}").json()['cast'][:10]
+  cert = get_certification(movie)
+  print (cert)
   try:
     if Movie.objects.get(api_id=movie_id):
       pass   
   except:
     Movie.objects.create(api_id=movie['id'], name=movie['original_title'], price=2.99)
-  return render(request, 'movies/detail.html', {'movie': movie, 'credits': credits, 'image_url': image_url })
+  return render(request, 'movies/detail.html', {'movie': movie, 'credits': credits, 'image_url': image_url, 'certification': cert })
 
+def get_certification(movie):
+  for m in movie['release_dates']['results']:
+    if m['iso_3166_1'] == "US":
+      return m['release_dates'][0]['certification']
 
 def cart(request):
   try:

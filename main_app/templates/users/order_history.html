@@ -10,8 +10,8 @@
         <section class="card-text">
           <ul class="list-group">
             {% for item in order.order_detail_list %}
-            <li class="tbd-flex list-group-item">
-              <p>
+            <li class="tbd-flex list-group-item tbd-bg-secondary text-white border-dark">
+              <p >
                 {{ item.quantity }} - {{ item.movie.name }}
               </p>
               <p>
