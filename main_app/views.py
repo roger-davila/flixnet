@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import login
+from django.http import HttpResponseForbidden
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ShippingAddress, Order, OrderDetail, Movie
 from django.contrib.auth.models import User
@@ -30,6 +32,8 @@ def get_movies_from_genre(genre):
 
 
 def userprofile(request, user_id):
+  if request.user.id != user_id:
+    return HttpResponseForbidden('You cannot view what is not yours')
   addresses = ShippingAddress.objects.filter(user=request.user)
   user = User.objects.get(id=user_id)
   # order = ShippingAddress.objects.filter(user=request.user)
@@ -119,6 +123,8 @@ def confirm_order(request, order_id):
   current_order.save()
   return render(request, 'cart/confirm_order.html', { 'current_order': current_order })
 
+
+@login_required
 def add_to_cart(request):
   addresses = ShippingAddress.objects.filter(user=request.user)
   if len(addresses) == 0:

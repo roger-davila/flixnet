@@ -1,19 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
-  <form action="{% url 'search' %}" method="GET">
-    {% csrf_token %}
-    <input type="text" name="search">
-    <input type="submit" name="submit" value="SearchXYZ">
-  </form>
+  
+<form action="{% url 'search' %}" method="GET">
+  <div class="input-group mb-3">
+      {% csrf_token %}
+      <input name="search" type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="button-addon2">
+      <button name="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+</form>
+  <br>
+  <br>
   {% if movies %}
-    {% for movie in movies %}
-    <a href="{% url 'movie_detail' movie.id %}">
-      <article>
-        <p>{{movie.original_title}}</p>
-        <p>{{movie.id}}</p>
-        <img src="{{image_url}}{{movie.poster_path}}" alt="">
-      </article>
-    </a>
-    {% endfor %}
+  <div class="row">
+  {% for movie in movies %}
+    <div class="col-sm-6 p-2">
+      <div class="card bg-transparent">
+        <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="">
+        <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
   {% endif %}
 {% endblock %}
+<div class="row">
+  {% for address in addresses %}
+  <div class="col-sm-6 mt-3">
+    <div class="card tbd-bg-secondary">
+      <div class="card-body">
+        <h2 class="card-title">{{ address.name }}</h2>
+        <section class="card-text">
+          <p>Street: {{ address.address }}</p>
+          <p>City: {{ address.city }}</p> 
+          <p>State: {{ address.state }}</p>
+          <p>ZipCode: {{ address.zip_code }}</p>
+          <p>Country: {{ address.country }}</p>
+          <a class="card-link" href="{% url 'shipping_address_update' address.id %}">Edit</a>
+          <a class="card-link tbd-text-danger" href="{% url 'shipping_address_delete' address.id %}">Delete</a>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>

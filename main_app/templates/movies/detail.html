@@ -7,10 +7,12 @@
   {% for person in credits %}
     <span>{{ person.name }} ||</span>
   {% endfor %}
+  {% if user.is_authenticated %}
   <form action="{% url 'add_to_cart' %}" method="POST">
     {% csrf_token %}
     <input type="hidden" value="{{movie.id}}" name="movie_id">
     <input type="hidden" value="{{movie.original_title}}" name="movie_name">
     <button type="submit" value="Add To Cart">Add To Cart</button>
   </form>
+  {% endif %}
 {% endblock %}
