@@ -43,3 +43,7 @@
 .tbd-search-width {
   max-width: 900px !important;
 }
+
+.cast span:not(:last-child):after { 
+  content: " \2022";
+}
