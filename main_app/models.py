@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.db.models import Sum
 # Create your models here.
 
 STATES = (
@@ -63,15 +64,24 @@ class Order(models.Model):
 
   def __str__(self):
     return f"Order: {self.id} created by User: {self.user_id}"
-  
+
   def order_detail_list(self):
     return self.orderdetail_set.all()
+
+  def order_total(self):
+    return self.orderdetail_set.all().aggregate(Sum('price'))['price__sum']
+
 
 class OrderDetail(models.Model):
   order = models.ForeignKey(Order, on_delete=models.CASCADE)
   movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
   quantity = models.IntegerField()
   price = models.DecimalField(max_digits=6, decimal_places=2)
+
+  def set_order_price(self):
+    self.price = self.quantity * 2.99
+    self.save()
+    return(self.price)
 
   def __str__(self):
     return f"Order Detail: {self.id} movie: {self.movie.name} quantity:{self.quantity}"

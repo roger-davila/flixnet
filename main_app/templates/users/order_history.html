@@ -1,11 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Your Order History</h1>
+<div class="row">
   {% for order in orders %}
-    <p>Order No. {{order.id}}</p>
-    <p>Order Placed: {{order.order_date}} - PST</p>
-    {% for item in order.order_detail_list %}
-      <p>{{ item.quantity }} - {{ item.movie.name }} - {{ item.price }}</p>
-    {% endfor %}
-  {% endfor %}
+  <div class="col-sm-12 mt-3">
+    <div class="card tbd-bg-secondary">
+      <div class="card-body">
+        <h2 class="card-title">Order No. {{ order.id }} - <span class="h4">{{order.order_date}}</span></h2>
+        <section class="card-text">
+          <ul class="list-group">
+            {% for item in order.order_detail_list %}
+            <li class="tbd-flex list-group-item">
+              <p>
+                {{ item.quantity }} - {{ item.movie.name }}
+              </p>
+              <p>
+                {{ item.price }}
+              </p>
+            </li>
+            {% endfor %}
+          </ul>
+          <p class="p-2 m-0 h3" style="text-align:right">Total - ${{ order.order_total }}</p>
+        </section>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endblock %}
