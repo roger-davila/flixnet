@@ -2,6 +2,9 @@
 {% block content %}
 <h1>User Home Page</h1>
   <div class="col s6">
+    {% if message %}
+      <p>{{ message }}</p>
+    {% endif %}
     <h4>{{ user.username }}</h4>
       <a href="{% url 'shipping_address_create' %}">Add Address</a>
       {% for address in addresses %}

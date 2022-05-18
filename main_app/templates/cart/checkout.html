@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Checkout</h1>
-<form action="{% url 'confirm_order' current_order.id %}">
+<form action="{% url 'confirm_order' current_order.id %}" method="POST">
+  {% csrf_token %}
   <h4>Select Shipping Address</h4>
   <select name="shipping_address">
     {% for address in addresses %}
