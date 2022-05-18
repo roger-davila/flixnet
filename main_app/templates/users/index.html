@@ -1,26 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>User Home Page</h1>
-  <div class="col s6">
-    {% if message %}
-      <p>{{ message }}</p>
-    {% endif %}
-    <h4>{{ user.username }}</h4>
-      <a href="{% url 'shipping_address_create' %}">Add Address</a>
-      {% for address in addresses %}
-          <div class="card-content">
-            <span class="card-title">
-               <p>Name {{ address.name }}</p> 
-               <p>Street {{ address.address }}</p>
-               <p>City {{ address.city }}</p> 
-               <p>State {{ address.state }}</p>
-               <p>ZipCode {{ address.zip_code }}</p>
-               <p>Country {{ address.country }}</p>
-            </span>
-            <a href="{% url 'shipping_address_update' address.id %}">Edit</a>
-            <a href="{% url 'shipping_address_delete' address.id %}">Delete</a>
-          </div>
-      {% endfor %}
-      <h5></h5>
+<div>
+
+</div>
+{% if message %}
+<div class="col-sm-6">
+  <div class="card text-bg-danger bg-opacity-25 p-1">
+    <section class="card-body danger">
+      <p class="card-text text-danger">{{ message }}</p>
+    </section>
   </div>
+</div>
+{% endif %}
+<div>
+<div class="tbd-flex">
+  <h1 class="tbd-primary-underline">{{ user.username }}'s Home Page</h1>
+  <div class="tbd-flex align-self-center">
+    <a class="btn tbd-company-primary" href="{% url 'shipping_address_create' %}">Add Address</a>
+  </div>
+</div>
+  <div class="row">
+    {% for address in addresses %}
+    <div class="col-sm-6 mt-3">
+      <div class="card tbd-bg-secondary">
+        <div class="card-body">
+          <h2 class="card-title">{{ address.name }}</h2>
+          <section class="card-text">
+            <p>Street: {{ address.address }}</p>
+            <p>City: {{ address.city }}</p> 
+            <p>State: {{ address.state }}</p>
+            <p>ZipCode: {{ address.zip_code }}</p>
+            <p>Country: {{ address.country }}</p>
+            <a class="card-link" href="{% url 'shipping_address_update' address.id %}">Edit</a>
+            <a class="card-link tbd-text-danger" href="{% url 'shipping_address_delete' address.id %}">Delete</a>
+          </section>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+  </div>
+</div>
 {% endblock %}

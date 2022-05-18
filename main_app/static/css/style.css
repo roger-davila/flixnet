@@ -1,0 +1,41 @@
+/* .test {
+  background-color: blue;
+  color: red;
+} */
+
+:root {
+  --tbd-bg-main: #222831;
+  --tbd-bg-secondary: #393E46;
+  --tbd-primary: #DB5C5D;
+  --tbd-main-text: #FFFFFF;
+}
+
+.tbd-text-danger {
+  color: var(--tbd-danger) ;
+}
+
+.tbd-bg-primary {
+  background-color: var(--tbd-bg-main);
+}
+
+.tbd-bg-secondary {
+  background-color: var(--tbd-bg-secondary);
+}
+
+.tbd-text-primary {
+  color: var(--tbd-main-text);
+}
+
+.tbd-company-primary {
+  background-color: var(--tbd-primary);
+  color: var(--tbd-main-text);
+}
+
+.tbd-primary-underline {
+  border-bottom: 4px solid var(--tbd-primary) ;
+}
+
+.tbd-flex {
+  display: flex;
+  justify-content: space-between;
+}
