@@ -106,6 +106,8 @@ def cart(request):
 
 
 def checkout(request):
+  form_data = request.POST.get('shipping_address')
+  print(form_data)
   current_order = Order.objects.get(user=request.user.id, checkout_status=False)
   addresses = ShippingAddress.objects.filter(user=request.user)
   return render(request, 'cart/checkout.html', { 'addresses': addresses, 'current_order': current_order })
@@ -118,6 +120,11 @@ def confirm_order(request, order_id):
   return render(request, 'cart/confirm_order.html', { 'current_order': current_order })
 
 def add_to_cart(request):
+
+  addresses = ShippingAddress.objects.filter(user=request.user)
+  if len(addresses) == 0:
+    message = 'Please create an address to add movie to cart'
+    return render(request, 'users/index.html', {'message': message})
   movie_id = request.POST.get('movie_id')
   selected_movie = Movie.objects.get(api_id=movie_id)
   current_order = ''
@@ -134,6 +141,7 @@ def add_to_cart(request):
       OrderDetail.objects.create(order = current_order, movie = selected_movie, quantity=1, price=2.99)
   else:
     addresses = ShippingAddress.objects.filter(user=request.user)
+    print('Reaching Line 143')
     default_address = addresses[0]
     new_order = Order.objects.create(user = request.user, ship_address = default_address)
     OrderDetail.objects.create(order = new_order, movie = selected_movie, quantity=1, price=2.99)
