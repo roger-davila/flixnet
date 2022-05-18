@@ -81,10 +81,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'flixnet',
-        'USER': 'prkrsamuels',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': ''
     }
 }
 
@@ -134,3 +130,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+import django_on_heroku
+django_on_heroku.settings(locals())
