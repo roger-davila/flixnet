@@ -10,6 +10,7 @@ urlpatterns = [
   path('shipping_address/<int:pk>/delete/', views.ShippingAddressDelete.as_view(), name='shipping_address_delete'),
   path('shipping_address/<int:pk>/update/', views.ShippingAddressUpdate.as_view(), name='shipping_address_update'),
   path('user/<int:user_id>/', views.userprofile, name='userprofile'),
+  path('user/<int:user_id>/orders', views.user_orders, name='user_orders'),
   path('cart/', views.cart, name='cart'),
   path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
   path('cart/checkout/', views.checkout, name='checkout'),
