@@ -146,3 +146,8 @@ def add_to_cart(request):
     new_order = Order.objects.create(user = request.user, ship_address = default_address)
     OrderDetail.objects.create(order = new_order, movie = selected_movie, quantity=1, price=2.99)
   return redirect('cart')
+
+def user_orders(request, user_id):
+  orders = Order.objects.filter(user=user_id)
+  print(orders)
+  return render(request, 'users/order_history.html', {'orders': orders})
