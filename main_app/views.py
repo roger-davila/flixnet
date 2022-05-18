@@ -120,7 +120,6 @@ def confirm_order(request, order_id):
   return render(request, 'cart/confirm_order.html', { 'current_order': current_order })
 
 def add_to_cart(request):
-
   addresses = ShippingAddress.objects.filter(user=request.user)
   if len(addresses) == 0:
     message = 'Please create an address to add movie to cart'
@@ -136,7 +135,8 @@ def add_to_cart(request):
     try:
       order_to_update = OrderDetail.objects.filter(order=current_order, movie=selected_movie)
       q = order_to_update[0].quantity + 1
-      order_to_update.update(quantity=q) 
+      order_to_update.update(quantity=q)
+      order_to_update[0].set_order_price()
     except:
       OrderDetail.objects.create(order = current_order, movie = selected_movie, quantity=1, price=2.99)
   else:
@@ -147,7 +147,7 @@ def add_to_cart(request):
     OrderDetail.objects.create(order = new_order, movie = selected_movie, quantity=1, price=2.99)
   return redirect('cart')
 
+
 def user_orders(request, user_id):
   orders = Order.objects.filter(user=user_id)
-  print(orders)
   return render(request, 'users/order_history.html', {'orders': orders})
