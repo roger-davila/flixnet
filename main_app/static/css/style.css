@@ -39,3 +39,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.tbd-search-width {
+  max-width: 900px !important;
+}
