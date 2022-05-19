@@ -14,27 +14,27 @@
   <div class="collapse" id="navbarToggleExternalContent">
     <div class="tbd-bg-secondary p-4 d-flex flex-column">
       <li>
-        <a class="fs-4" href="{% url 'home' %}">Home</a>
+        <a class="link-item fs-4" href="{% url 'home' %}">Home</a>
       </li>
       <li>
-        <a class="fs-4" href="{% url 'search' %}">Search Movies</a>
+        <a class="link-item fs-4" href="{% url 'search' %}">Search Movies</a>
       </li>
       {% if user.is_authenticated %}
       <li>
-        <a class="fs-4" href="{% url 'userprofile' user.id %}">Profile</a>
+        <a class="link-item fs-4" href="{% url 'userprofile' user.id %}">Profile</a>
       </li>
       <li>
-        <a class="fs-4" href="{% url 'user_orders' user.id %}">Order History</a>
+        <a class="link-item fs-4" href="{% url 'user_orders' user.id %}">Order History</a>
       </li>
       <li>
-        <a class="fs-4" href="{% url 'cart'%}">Cart</a>
+        <a class="link-item fs-4" href="{% url 'cart'%}">Cart</a>
       </li>
       <li>
-        <a class="fs-4" href="{% url 'logout' %}">Log Out</a>
+        <a class="link-item fs-4" href="{% url 'logout' %}">Log Out</a>
       </li>
       {% else %}
-        <a class="fs-4" href="{% url 'login' %}">Log In</a>
-        <a class="fs-4" href="{% url 'signup' %}">Sign Up</a>
+        <a class="link-item fs-4" href="{% url 'login' %}">Log In</a>
+        <a class="link-item fs-4" href="{% url 'signup' %}">Sign Up</a>
       {% endif %}
     </div>
   </div>

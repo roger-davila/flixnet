@@ -33,6 +33,10 @@ a:visited {
   color: inherit;
 }
 
+.link-item:hover {
+  color: var(--tbd-primary);
+}
+
 .tbd-text-danger {
   color: var(--tbd-danger) ;
 }
@@ -87,4 +91,12 @@ a:visited {
 
 img {
   aspect-ratio: 2 / 3;
+}
+
+.btn.tbd-company-primary {
+  margin-top: -2rem;
+  font-size: 1.4rem;
+  position: relative;
+  padding: 0.4rem 1.5rem;
+  z-index: 2;
 }
