@@ -47,6 +47,15 @@ class ShippingAddressCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+  
+  def get_form(self, form_class=None):
+    form = super(ShippingAddressCreate, self).get_form(form_class)
+    for visible in form.visible_fields():
+        if visible.field.label == 'State':
+            visible.field.widget.attrs.update({'class': 'form-select tbd-bg-secondary text-white'})
+        else:
+            visible.field.widget.attrs.update({'class': 'form-control tbd-bg-secondary'})
+    return form
 
 
 class ShippingAddressUpdate(LoginRequiredMixin, UpdateView):
@@ -92,7 +101,6 @@ def movie_detail(request, movie_id):
   movie = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}?api_key={os.environ['MOVIE_DB_KEY']}&append_to_response=release_dates").json()
   credits = requests.get(f"{os.environ['MOVIE_DB_ROOT']}movie/{movie_id}/credits?api_key={os.environ['MOVIE_DB_KEY']}").json()['cast'][:10]
   cert = get_certification(movie)
-  print (cert)
   try:
     if Movie.objects.get(api_id=movie_id):
       pass   
@@ -109,15 +117,15 @@ def cart(request):
   try:
     open_order = Order.objects.get(user=request.user.id, checkout_status=False)
     if open_order:
+      order_total = open_order.order_total()
       open_order = open_order.order_detail_list()
   except:
     open_order = ''
-  return render(request, 'cart/index.html', { 'open_order': open_order })
+  return render(request, 'cart/index.html', { 'open_order': open_order, 'order_total':order_total })
 
 
 def checkout(request):
   form_data = request.POST.get('shipping_address')
-  print(form_data)
   current_order = Order.objects.get(user=request.user.id, checkout_status=False)
   addresses = ShippingAddress.objects.filter(user=request.user)
   return render(request, 'cart/checkout.html', { 'addresses': addresses, 'current_order': current_order })
