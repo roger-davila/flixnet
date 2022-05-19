@@ -11,21 +11,44 @@
   <title>Flixnet</title>
 </head>
 <body class="tbd-bg-primary tbd-text-primary">
-  <nav class="tbd-bg-secondary">
-    <h2>Flixnet</h2>
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'search' %}">Search Movies</a>
-    {% if user.is_authenticated %}
-      <a href="{% url 'userprofile' user.id %}">Profile</a>
-      <a href="{% url 'user_orders' user.id %}">Order History</a>
-      <a href="{% url 'cart'%}">Cart</a>
-      <a href="{% url 'logout' %}">Log Out</a>
-    {% else %}
-      <a href="{% url 'login' %}">Log In</a>
-      <a href="{% url 'signup' %}">Sign Up</a>
-    {% endif %}
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="tbd-bg-secondary p-4 d-flex flex-column">
+      <li>
+        <a class="fs-4" href="{% url 'home' %}">Home</a>
+      </li>
+      <li>
+        <a class="fs-4" href="{% url 'search' %}">Search Movies</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li>
+        <a class="fs-4" href="{% url 'userprofile' user.id %}">Profile</a>
+      </li>
+      <li>
+        <a class="fs-4" href="{% url 'user_orders' user.id %}">Order History</a>
+      </li>
+      <li>
+        <a class="fs-4" href="{% url 'cart'%}">Cart</a>
+      </li>
+      <li>
+        <a class="fs-4" href="{% url 'logout' %}">Log Out</a>
+      </li>
+      {% else %}
+        <a class="fs-4" href="{% url 'login' %}">Log In</a>
+        <a class="fs-4" href="{% url 'signup' %}">Sign Up</a>
+      {% endif %}
+    </div>
+  </div>
+  <nav class="navbar navbar-dark tbd-bg-secondary">
+    <div class="container-fluid">
+      <h2 class="tbd-text-company m-0">
+        <a id="logo-link" href="{% url 'home' %}">Flixnet</a>
+      </h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
   </nav>
-  <main class="container p-0 pt-2">
+  <main class="container p-4">
     {% block content%}
     {% endblock %}
   </main>

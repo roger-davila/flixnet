@@ -4,7 +4,7 @@
 <form action="{% url 'search' %}" method="GET">
   <div class="input-group mb-3">
       {% csrf_token %}
-      <input name="search" type="text" class="form-control" placeholder="search" aria-label="search" aria-describedby="button-addon2">
+      <input name="search" type="text" class="form-control rounded-start" placeholder="Search movies" aria-label="search" aria-describedby="button-addon2">
       <button name="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
@@ -17,7 +17,7 @@
   {% for movie in movies %}
     <div class="col-sm-6 p-2">
       <div class="card bg-transparent">
-        <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="">
+        <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
         <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
       </div>
     </div>
