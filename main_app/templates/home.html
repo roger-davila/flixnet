@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>Home</h1>
-  <h1>New Release</h1>
   {% for genre in genres %}
-    <h1>{{ genre.name }}</h1>
-    {% for movie in genre.movies %}
-    <h4>{{ movie.original_title }}</h4>
-    <img src="{{image_url}}{{movie.poster_path}}" width="50" alt="{{ movie.original_title }}">
-    {% endfor %}
+  <div class="row mb-3">
+    <div class="d-flex mb-3 p-0">
+      <h1 class="tbd-primary-underline">
+      {{ genre.name }}
+      </h1>
+    </div>
+    <div class="d-flex overflow-auto p-0">
+      {% for movie in genre.movies %}
+        <div class="col-4 me-1">
+          <div class="card bg-transparent">
+            <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
+            <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
   {% endfor %}
-{% endblock %}
+  {% endblock %}

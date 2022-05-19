@@ -11,10 +11,10 @@
           <ul class="list-group">
             {% for item in order.order_detail_list %}
             <li class="tbd-flex list-group-item tbd-bg-secondary text-white border-dark">
-              <p >
+              <p class="m-0">
                 {{ item.quantity }} - {{ item.movie.name }}
               </p>
-              <p>
+              <p class="m-0">
                 {{ item.price }}
               </p>
             </li>
