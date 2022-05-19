@@ -3,32 +3,52 @@
 <div class="d-flex mb-3 p-0">
   <h1 class="tbd-primary-underline">Checkout</h1>
 </div>
+<h4>This is a dummy page, just click the purchase button!!</h4>
 <form action="{% url 'confirm_order' current_order.id %}" method="POST">
   {% csrf_token %}
-  <h4>Select Shipping Address</h4>
-  <select name="shipping_address">
-    {% for address in addresses %}
-    <option value="{{ address }}">{{ address }}</option>
-    {% endfor %}
-  </select>
+  <h4 class="mt-4 mb-4">Select Shipping Address</h4>
+  <div class="row  gap-3">
+    <div class="col-4">
+      <select class="form-select tbd-bg-secondary text-white" name="shipping_address">
+        {% for address in addresses %}
+        <option value="{{ address }}">{{ address }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
   
-  <h4>Select Billing Address</h4>
-  <select name="shipping_address">
-    {% for address in addresses %}
-    <option value="{{ address }}">{{ address }}</option>
-    {% endfor %}
-  </select>
-  
-  <br>
-  <input type="number" placeholder="1234 5678 0987 6543">
-  <input type="text" placeholder="CVV">
-  <br>
-  <input type="text" placeholder="MM/DD">
-  <br>
-  <input type="text" placeholder="First Name">
-  <br>
-  <input type="text" placeholder="Last Name">
-  <br>
-  <button type="submit">Confirm</button>
+  <h4 class="mt-4 mb-4">Select Billing Address</h4>
+  <div class="row gap-3">
+    <div class="col-4">
+      <select class="form-select tbd-bg-secondary text-white" name="shipping_address">
+        {% for address in addresses %}
+        <option value="{{ address }}">{{ address }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <h4 class="mt-4 mb-4">Credit Card Details</h4>
+  <div class="row  gap-3">
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="text" placeholder="First Name">
+    </div>
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="text" placeholder="Last Name">
+    </div>
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="number" placeholder="1234 5678 0987 6543">
+    </div>
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="text" placeholder="CVV">
+    </div>
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="text" placeholder="MM/DD">
+    </div>
+    <div class="col-4">
+      <input class="form-control tbd-bg-secondary" type="text" placeholder="ZipCode">
+    </div>
+    <div class="col-4">
+      <button class="btn tbd-company-primary" type="submit">Purchase</button>
+    </div>
 </form>
 {% endblock %}
