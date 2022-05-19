@@ -13,11 +13,10 @@
 </div>
 {% endif %}
 <div>
-<div class="tbd-flex">
-  <h1 class="tbd-primary-underline">{{ user.username }}'s Home Page</h1>
-  <div class="tbd-flex align-self-center">
-    <a class="btn tbd-company-primary" href="{% url 'shipping_address_create' %}">Add Address</a>
-  </div>
+<div class="d-flex mb-3 p-0 justify-content-center">
+  <h1 class="tbd-primary-underline">
+    {{ user.username }}'s Home Page
+  </h1>
 </div>
   <div class="row">
     {% for address in addresses %}
@@ -38,6 +37,9 @@
       </div>
     </div>
 {% endfor %}
+  </div>
+  <div class="tbd-flex align-self-center mt-3">
+    <a class="btn tbd-company-primary" href="{% url 'shipping_address_create' %}">Add Address</a>
   </div>
 </div>
 {% endblock %}

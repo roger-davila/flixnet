@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Log In</h1>
+<div class="d-flex mb-3 p-0">
+  <h1 class="tbd-primary-underline">
+    Log In
+  </h1>
+</div>
 
 <form method="POST" action="{% url 'login' %}">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" class="btn" value="login">
+  <input type="submit" class="btn tbd-company-primary" value="login">
   <input type="hidden" name="next" value="{{ next }}">
 </form>
 
