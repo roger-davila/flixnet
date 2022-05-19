@@ -91,6 +91,7 @@ a:visited {
 
 img {
   aspect-ratio: 2 / 3;
+  max-width: 100%;
 }
 
 .btn.tbd-company-primary {
@@ -98,3 +99,7 @@ img {
   padding: 0.4rem 1.5rem;
 }
 
+.form-control:focus {
+  color: white;
+  background-color: var(--tbd-bg-secondary);
+}

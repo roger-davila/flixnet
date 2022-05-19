@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import ShippingAddress, Order, OrderDetail, Movie
 from django.contrib.auth.models import User
+from .forms import UserRegistrationForm
 import requests
 import json
 import os
@@ -36,7 +37,6 @@ def userprofile(request, user_id):
     return HttpResponseForbidden('You cannot view what is not yours')
   addresses = ShippingAddress.objects.filter(user=request.user)
   user = User.objects.get(id=user_id)
-  # order = ShippingAddress.objects.filter(user=request.user)
   return render(request, 'users/index.html', {'addresses' : addresses , 'user':user})
 
 
@@ -73,7 +73,7 @@ class ShippingAddressDelete(LoginRequiredMixin, DeleteView):
 def signup(request):
   error_message = ''
   if request.method == 'POST':
-    form = UserCreationForm(request.POST)
+    form = UserRegistrationForm(request.POST)
     if form.is_valid():
       user = form.save()
       login(request, user)
@@ -81,7 +81,7 @@ def signup(request):
     else:
       error_message = 'Invalid sign up - try again'
   
-  form = UserCreationForm()
+  form = UserRegistrationForm()
   context = {'form': form, 'error_message': error_message }
   return render(request, 'registration/signup.html', context)
 
