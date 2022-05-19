@@ -1,14 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h1>Cart</h1>
+<div class="d-flex mb-3 p-0">
+  <h1 class="tbd-primary-underline">Cart</h1>
+</div>
   {% if open_order %}
+  <div class="row flex-column align-content-center" >
     {% for detail in open_order %}
-    <div>
-      {{ detail.movie.name }} x {{ detail.quantity }} |
-      {{ detail.price }}
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mt-3 ">
+      <div class="card tbd-bg-secondary p-2">
+        <p>Title: {{ detail.movie.name }}</p>
+        <p>Qty: {{ detail.quantity }}</p>
+        <p>Price: {{ detail.price }}</p>
+      </div>
+      <div class="w-100"> </div>
     </div>
     {% endfor %}
-    <a href="{% url 'checkout'%}">Checkout</a>
+  </div>
+
+  <div class="row justify-content-center" >
+    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mt-3 d-flex justify-content-between">
+        <h2>Total: {{ order_total }}</h2>
+        <button class="btn tbd-company-primary"> 
+         <a  href="{% url 'checkout'%}">Checkout</a>
+        </button> 
+    </div>
+  </div>
   {% else %}
     <h2>No Open Orders</h2>
   {% endif %}

@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Checkout</h1>
+<div class="d-flex mb-3 p-0">
+  <h1 class="tbd-primary-underline">Checkout</h1>
+</div>
 <form action="{% url 'confirm_order' current_order.id %}" method="POST">
   {% csrf_token %}
   <h4>Select Shipping Address</h4>

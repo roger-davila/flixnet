@@ -94,9 +94,6 @@ img {
 }
 
 .btn.tbd-company-primary {
-  margin-top: -2rem;
   font-size: 1.4rem;
-  position: relative;
   padding: 0.4rem 1.5rem;
-  z-index: 2;
 }
