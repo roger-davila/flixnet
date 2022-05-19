@@ -47,6 +47,15 @@ class ShippingAddressCreate(LoginRequiredMixin, CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
+  
+  def get_form(self, form_class=None):
+    form = super(ShippingAddressCreate, self).get_form(form_class)
+    for visible in form.visible_fields():
+        if visible.field.label == 'State':
+            visible.field.widget.attrs.update({'class': 'form-select tbd-bg-secondary text-white'})
+        else:
+            visible.field.widget.attrs.update({'class': 'form-control tbd-bg-secondary'})
+    return form
 
 
 class ShippingAddressUpdate(LoginRequiredMixin, UpdateView):
