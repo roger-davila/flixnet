@@ -8,6 +8,7 @@
   --tbd-bg-secondary: #393E46;
   --tbd-primary: #DB5C5D;
   --tbd-main-text: #FFFFFF;
+  --tbd-transparent: rgba(255,255,255, 0.3);
 }
 
 .tbd-text-danger {
@@ -46,4 +47,17 @@
 
 .cast span:not(:last-child):after { 
   content: " \2022";
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--tbd-transparent);
+  border-radius: 8px;
+}
+
+img {
+  aspect-ratio: 2 / 3;
 }
