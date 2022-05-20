@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import login
 from django.http import HttpResponseForbidden
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -53,11 +52,9 @@ class ShippingAddressCreate(LoginRequiredMixin, CreateView):
         form = super(ShippingAddressCreate, self).get_form(form_class)
         for visible in form.visible_fields():
             if visible.field.label == 'State':
-                visible.field.widget.attrs.update(
-                    {'class': 'form-select tbd-bg-secondary text-white'})
+                visible.field.widget.attrs.update({'class': 'form-select tbd-bg-secondary text-white'})
             else:
-                visible.field.widget.attrs.update(
-                    {'class': 'form-control tbd-bg-secondary'})
+                visible.field.widget.attrs.update(ß{'class': 'form-control tbd-bg-secondary'})
         return form
 
 
@@ -94,8 +91,7 @@ def search(request):
     movies = ''
     image_url = ''
     if query:
-        movies = requests.get(
-            f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}").json()['results']
+        movies = requests.get(f"{os.environ['MOVIE_DB_ROOT']}search/movie?api_key={os.environ['MOVIE_DB_KEY']}&query={query}").json()['results']
         image_url = os.environ['MOVIE_DB_IMAGE_URL']
     return render(request, 'movies/search.html', {'movies': movies, 'image_url': image_url})
 
