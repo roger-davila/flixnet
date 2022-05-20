@@ -5,7 +5,8 @@
   --tbd-bg-secondary: #393E46;
   --tbd-primary: #DB5C5D;
   --tbd-main-text: #FFFFFF;
-  --tbd-transparent: rgba(255,255,255, 0.3);
+  --tbd-semi-transparent: rgba(255,255,255, 0.3);
+  --tbd-transparent: rgba(255,255,255, 0);
 }
 
 * {
@@ -85,7 +86,7 @@ a:visited {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--tbd-transparent);
+  background-color: var(--tbd-semi-transparent);
   border-radius: 8px;
 }
 
@@ -111,4 +112,10 @@ img {
 #detail-cart-button {
   margin-top: -2rem;
   position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--tbd-transparent);
+  }
 }
