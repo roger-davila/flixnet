@@ -54,7 +54,7 @@ class ShippingAddressCreate(LoginRequiredMixin, CreateView):
             if visible.field.label == 'State':
                 visible.field.widget.attrs.update({'class': 'form-select tbd-bg-secondary text-white'})
             else:
-                visible.field.widget.attrs.update(ß{'class': 'form-control tbd-bg-secondary'})
+                visible.field.widget.attrs.update({'class': 'form-control tbd-bg-secondary'})
         return form
 
 
