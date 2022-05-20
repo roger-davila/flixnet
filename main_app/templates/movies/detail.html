@@ -1,70 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-  <!-- <img src="{{image_url}}{{movie.backdrop_path}}" alt=""> -->
-  <div class="row justify-content-center">
-    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 p-2 justify-content-center d-flex flex-column">
-      <div class="card bg-transparent">
-        <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="">
-      </div>
-      <div>
-        {% if user.is_authenticated %}
-        <form class="text-center" action="{% url 'add_to_cart' %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" value="{{movie.id}}" name="movie_id">
-          <input type="hidden" value="{{movie.original_title}}" name="movie_name">
-          <button class="btn tbd-company-primary" type="submit" value="Add To Cart">Add To Cart</button>
-        </form>
-        {% endif %}
-        <br>
-        <h4 class="text-center">{{movie.original_title}}</h4>
-        <div class="d-flex justify-content-between">
-          <p class="text-center">{{ movie.release_date}}</p>
-          <p class="text-center">{{certification}}</p>
-          <p class="text-center">{{movie.runtime}} mins</p>
-        </div>
-        <div class="d-flex justify-content-center">
-          <p class="text-center me-4"> Votes - {{movie.vote_count}}</p>
-          <p class="text-center">Rating {{movie.vote_average}}/10</p>
-        </div>
-      </div>
+<div class="row justify-content-center">
+  <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 p-2 justify-content-center d-flex flex-column">
+    <div class="card bg-transparent">
+      <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="">
     </div>
     <div>
-      <div class="d-flex mb-3 p-0">
-        <h2 class="tbd-primary-underline">
-          Plot Summary
-        </h2>
+      {% if user.is_authenticated %}
+      <form class="text-center" action="{% url 'add_to_cart' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{movie.id}}" name="movie_id">
+        <input type="hidden" value="{{movie.original_title}}" name="movie_name">
+        <button class="btn tbd-company-primary" type="submit" value="Add To Cart">Add To Cart</button>
+      </form>
+      {% endif %}
+      <br>
+      <h4 class="text-center">{{movie.original_title}}</h4>
+      <div class="d-flex justify-content-between">
+        <p class="text-center">{{ movie.release_date}}</p>
+        <p class="text-center">{{certification}}</p>
+        <p class="text-center">{{movie.runtime}} mins</p>
       </div>
-      <p>{{movie.overview}}</p>
-    </div>
-    <div class="cast mb-3">
-      <div class="d-flex mb-3 p-0">
-        <h2 class="tbd-primary-underline">
-          Cast
-        </h2>
+      <div class="d-flex justify-content-center">
+        <p class="text-center me-4"> Votes - {{movie.vote_count}}</p>
+        <p class="text-center">Rating {{movie.vote_average}}/10</p>
       </div>
-      {% for person in credits %}
-      <span>{{ person.name }}</span>
-    {% endfor %}
-    </div>
-    <div class="genre">
-      <div class="d-flex mb-3 p-0">
-        <h2 class="tbd-primary-underline">
-          Genres
-        </h2>
-      </div>
-      {% for genre in movie.genres %}
-      <span class="font-monospace badge rounded-pill tbd-company-primary mb-2">{{genre.name}}</span>
-      {% endfor %}
     </div>
   </div>
-  
- 
-  <!-- {% if user.is_authenticated %}
-    <form action="{% url 'add_to_cart' %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" value="{{movie.id}}" name="movie_id">
-      <input type="hidden" value="{{movie.original_title}}" name="movie_name">
-      <button type="submit" value="Add To Cart">Add To Cart</button>
-    </form>
-  {% endif %} -->
+  <div>
+    <div class="d-flex mb-3 p-0">
+      <h2 class="tbd-primary-underline">
+        Plot Summary
+      </h2>
+    </div>
+    <p>{{movie.overview}}</p>
+  </div>
+  <div class="cast mb-3">
+    <div class="d-flex mb-3 p-0">
+      <h2 class="tbd-primary-underline">
+        Cast
+      </h2>
+    </div>
+    {% for person in credits %}
+    <span>{{ person.name }}</span>
+    {% endfor %}
+  </div>
+  <div class="genre">
+    <div class="d-flex mb-3 p-0">
+      <h2 class="tbd-primary-underline">
+        Genres
+      </h2>
+    </div>
+    {% for genre in movie.genres %}
+    <span class="font-monospace badge rounded-pill tbd-company-primary mb-2">{{genre.name}}</span>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

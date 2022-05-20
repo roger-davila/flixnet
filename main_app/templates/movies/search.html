@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-  
+
 <form action="{% url 'search' %}" method="GET">
   <div class="input-group mb-3">
-      {% csrf_token %}
-      <input name="search" type="text" class="form-control rounded-start" placeholder="Search movies" aria-label="search" aria-describedby="button-addon2">
-      <button name="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
-    </div>
-</form>
-  {% if movies %}
-  <div class="row">
-  {% for movie in movies %}
-    <div class="col-sm-6 p-2">
-      <div class="card bg-transparent">
-        <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
-        <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
-      </div>
-    </div>
-  {% endfor %}
+    {% csrf_token %}
+    <input name="search" type="text" class="form-control rounded-start" placeholder="Search movies" aria-label="search"
+      aria-describedby="button-addon2">
+    <button name="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
   </div>
-  {% endif %}
+</form>
+{% if movies %}
+<div class="row">
+  {% for movie in movies %}
+  <div class="col-sm-6 p-2">
+    <div class="card bg-transparent">
+      <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
+      <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
 {% endblock %}
 <div class="row">
   {% for address in addresses %}
@@ -31,7 +32,7 @@
         <h2 class="card-title">{{ address.name }}</h2>
         <section class="card-text">
           <p>Street: {{ address.address }}</p>
-          <p>City: {{ address.city }}</p> 
+          <p>City: {{ address.city }}</p>
           <p>State: {{ address.state }}</p>
           <p>ZipCode: {{ address.zip_code }}</p>
           <p>Country: {{ address.country }}</p>
@@ -41,5 +42,5 @@
       </div>
     </div>
   </div>
-{% endfor %}
+  {% endfor %}
 </div>

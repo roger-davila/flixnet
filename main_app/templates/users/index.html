@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-
-</div>
 {% if message %}
 <div class="col-sm-6">
   <div class="card text-bg-danger bg-opacity-25 p-1">
@@ -13,11 +10,11 @@
 </div>
 {% endif %}
 <div>
-<div class="d-flex mb-3 p-0 justify-content-center">
-  <h1 class="tbd-primary-underline">
-    {{ user.username }}'s Home Page
-  </h1>
-</div>
+  <div class="d-flex mb-3 p-0 justify-content-center">
+    <h1 class="tbd-primary-underline">
+      {{ user.username }}'s Home Page
+    </h1>
+  </div>
   <div class="row">
     {% for address in addresses %}
     <div class="col-sm-6 mt-3">
@@ -26,7 +23,7 @@
           <h2 class="card-title">{{ address.name }}</h2>
           <section class="card-text">
             <p>Street: {{ address.address }}</p>
-            <p>City: {{ address.city }}</p> 
+            <p>City: {{ address.city }}</p>
             <p>State: {{ address.state }}</p>
             <p>ZipCode: {{ address.zip_code }}</p>
             <p>Country: {{ address.country }}</p>
@@ -36,7 +33,7 @@
         </div>
       </div>
     </div>
-{% endfor %}
+    {% endfor %}
   </div>
   <div class="tbd-flex align-self-center mt-3">
     <a class="btn tbd-company-primary" href="{% url 'shipping_address_create' %}">Add Address</a>
