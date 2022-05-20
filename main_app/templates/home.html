@@ -9,7 +9,7 @@
   </div>
   <div class="d-flex overflow-auto p-0">
     {% for movie in genre.movies %}
-    <div class=" col-lg-3 col-4 me-1">
+    <div class=" col-lg-3 col-4 me-2 mb-2">
       <div class="card bg-transparent">
         <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
         <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
