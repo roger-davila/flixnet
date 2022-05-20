@@ -27,8 +27,8 @@
             <p>State: {{ address.state }}</p>
             <p>ZipCode: {{ address.zip_code }}</p>
             <p>Country: {{ address.country }}</p>
-            <a class="card-link" href="{% url 'shipping_address_update' address.id %}">Edit</a>
-            <a class="card-link tbd-text-danger" href="{% url 'shipping_address_delete' address.id %}">Delete</a>
+            <a class="card-link text-primary" href="{% url 'shipping_address_update' address.id %}">Edit</a>
+            <a class="card-link text-danger" href="{% url 'shipping_address_delete' address.id %}">Delete</a>
           </section>
         </div>
       </div>
