@@ -62,6 +62,15 @@ class ShippingAddressUpdate(LoginRequiredMixin, UpdateView):
     model = ShippingAddress
     fields = ['name', 'address', 'city', 'zip_code', 'state', 'country']
 
+    def get_form(self, form_class=None):
+        form = super(ShippingAddressUpdate, self).get_form(form_class)
+        for visible in form.visible_fields():
+            if visible.field.label == 'State':
+                visible.field.widget.attrs.update({'class': 'form-select tbd-bg-secondary text-white'})
+            else:
+                visible.field.widget.attrs.update({'class': 'form-control tbd-bg-secondary text-white'})
+        return form
+
 
 class ShippingAddressDelete(LoginRequiredMixin, DeleteView):
     model = ShippingAddress
