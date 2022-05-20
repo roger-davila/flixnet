@@ -11,7 +11,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{movie.id}}" name="movie_id">
         <input type="hidden" value="{{movie.original_title}}" name="movie_name">
-        <button class="btn tbd-company-primary" type="submit" value="Add To Cart">Add To Cart</button>
+        <button class="btn tbd-company-primary" id="detail-cart-button" type="submit" value="Add To Cart">Add To Cart</button>
       </form>
       {% endif %}
       <br>
