@@ -38,14 +38,14 @@
 
   | Description | Screenshot(Mobile) |
   |------------ | ------------|
-  | <h3 align="center">Landing Page</h3> | <img src="static/images/landingPage.png" width="700"/>
-  | <h3 align="center">Search Results Page</h3> | <img src="static/images/searchResults.png" width="700"/>
-  | <h3 align="center">Movie Detail 1/2</h3> | <img src="static/images/movieDetail1.png" width="700"/>
-  | <h3 align="center">Movie Detail 2/2</h3> | <img src="static/images/movieDetail2.png" width="700"/>
-  | <h3 align="center">Cart</h3> | <img src="static/images/cart.png" width="700">
-  | <h3 align="center">Checkout</h3> | <img src="static/images/checkout.png" width="700"/>
-  | <h3 align="center">Order History</h3> | <img src="static/images/orderHistory.png" width="700"/>
-  | <h3 align="center">Profile Page</h3> | <img src="static/images/profilePage.png" width="700"/>
+  | <h3 align="center">Landing Page</h3> | <img src="main_app/static/images/landingPage.png" width="500"/>
+  | <h3 align="center">Search Results Page</h3> | <img src="main_app/static/images/searchResults.png" width="500"/>
+  | <h3 align="center">Movie Detail 1/2</h3> | <img src="main_app/static/images/movieDetail1.png" width="500"/>
+  | <h3 align="center">Movie Detail 2/2</h3> | <img src="main_app/static/images/movieDetail2.png" width="500"/>
+  | <h3 align="center">Cart</h3> | <img src="main_app/static/images/cart.png" width="500">
+  | <h3 align="center">Checkout</h3> | <img src="main_app/static/images/checkout.png" width="500"/>
+  | <h3 align="center">Order History</h3> | <img src="main_app/static/images/orderHistory.png" width="500"/>
+  | <h3 align="center">Profile Page</h3> | <img src="main_app/static/images/profilePage.png" width="500"/>
 </details>
 
 ## :computer: Technologies Used
