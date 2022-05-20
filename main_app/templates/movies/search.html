@@ -4,7 +4,7 @@
 <form action="{% url 'search' %}" method="GET">
   <div class="input-group mb-3">
     {% csrf_token %}
-    <input name="search" type="text" class="form-control rounded-start" placeholder="Search movies" aria-label="search"
+    <input name="search" type="text" class="form-control tbd-bg-secondary text-white rounded-start" placeholder="Search movies" aria-label="search"
       aria-describedby="button-addon2">
     <button name="submit" class="btn btn-outline-secondary" type="submit" id="button-addon2">
       <i class="fa-solid fa-magnifying-glass"></i>
@@ -14,7 +14,7 @@
 {% if movies %}
 <div class="row">
   {% for movie in movies %}
-  <div class="col-sm-6 p-2">
+  <div class="col-xl-3 col-lg-4 col-sm-6 col-6 p-2">
     <div class="card bg-transparent">
       <img class="rounded" src="{{image_url}}{{movie.poster_path}}" alt="{{ movie.original_title }}">
       <a href="{% url 'movie_detail' movie.id %}" class="stretched-link"></a>
@@ -24,23 +24,3 @@
 </div>
 {% endif %}
 {% endblock %}
-<div class="row">
-  {% for address in addresses %}
-  <div class="col-sm-6 mt-3">
-    <div class="card tbd-bg-secondary">
-      <div class="card-body">
-        <h2 class="card-title">{{ address.name }}</h2>
-        <section class="card-text">
-          <p>Street: {{ address.address }}</p>
-          <p>City: {{ address.city }}</p>
-          <p>State: {{ address.state }}</p>
-          <p>ZipCode: {{ address.zip_code }}</p>
-          <p>Country: {{ address.country }}</p>
-          <a class="card-link" href="{% url 'shipping_address_update' address.id %}">Edit</a>
-          <a class="card-link tbd-text-danger" href="{% url 'shipping_address_delete' address.id %}">Delete</a>
-        </section>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-</div>
