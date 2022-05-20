@@ -117,13 +117,13 @@ def get_certification(movie):
 
 def cart(request):
     try:
-        open_order = Order.objects.get(
-            user=request.user.id, checkout_status=False)
+        open_order = Order.objects.get(user=request.user.id, checkout_status=False)
         if open_order:
             order_total = open_order.order_total()
             open_order = open_order.order_detail_list()
     except:
         open_order = ''
+        order_total = ''
     return render(request, 'cart/index.html', {'open_order': open_order, 'order_total': order_total})
 
 
